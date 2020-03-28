@@ -30,9 +30,22 @@ exports.updateUser=(req,res)=>{
                   error: "No user was found in DB"
                 });
               }
+              user.salt = undefined;
+              user.encry_password = undefined;
               res.json(user) 
         }
-
     )
-}
+};
 
+exports.userPurchaseList = (req, res) => {
+    Order.find({ user: req.profile._id })
+      .populate("user", "_id name")
+      .exec((err, order) => {
+        if (err) {
+          return res.status(400).json({
+            error: "No Order in this account"
+          });
+        }
+        return res.json(order);
+      });
+  };
