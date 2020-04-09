@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Base from "../core/Base";
 import { Link } from "react-router-dom";
 import { signup } from "../auth/helper";
-import Signin from "./Signin";
 
 const Signup=()=>{
 
@@ -21,11 +20,12 @@ const Signup=()=>{
       };
 
     const onSubmit=event=>{
-        console.log(name,email,password)
+        console.log(name,email,password);
         event.preventDefault();
         setValues({...value,error:false});
         signup({name,email,password})
         .then(data=>{
+            console.log(data);
             if(data.error){
                 setValues({...value,error:data.error,success:false})
             } else {
@@ -39,8 +39,40 @@ const Signup=()=>{
                 });
               }
         })
-        
+        .catch(console.log("Error in signup"));
     }
+
+
+    const successMessage = () => {
+        return (
+          <div className="row">
+            <div className="col-md-6 offset-sm-3 text-left">
+              <div
+                className="alert alert-success"
+                style={{ display: success ? "" : "none" }}
+              >
+                New account was created successfully. Please
+                <Link to="/signin">Login Here</Link>
+              </div>
+            </div>
+          </div>
+        );
+      };
+    
+      const errorMessage = () => {
+        return (
+          <div className="row">
+            <div className="col-md-6 offset-sm-3 text-left">
+              <div
+                className="alert alert-danger"
+                style={{ display: error ? "" : "none" }}
+              >
+                {error}
+              </div>
+            </div>
+          </div>
+        );
+      };
 
     const signUpForm=()=>{
         return(
@@ -83,7 +115,9 @@ const Signup=()=>{
 
     return(
         <Base title="Sign up page" description="A page for user to sign up!">
-        {signUpForm()}    
+            {successMessage()}
+            {errorMessage()}
+            {signUpForm()}    
         </Base>
     )
 }
