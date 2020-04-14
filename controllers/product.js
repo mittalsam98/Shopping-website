@@ -22,7 +22,6 @@ let form =new formidable.IncomingForm();
 form.keepExtensions=true;
 
 form.parse(req, (err, fields, file) => {
-    console.log(fields,file)
     if (err) {
       return res.status(400).json({
         error: "problem with image"

@@ -6,9 +6,9 @@ import { signup } from "../auth/helper";
 const Signup=()=>{
 
     const [value,setValues]=useState({
-        name: "",
-        email: "",
-        password: "",
+        name: "Sachin",
+        email: "mittalsam98@gmail.com",
+        password: "123456",
         error: "",
         success: false
     });
@@ -20,7 +20,6 @@ const Signup=()=>{
       };
 
     const onSubmit=event=>{
-        console.log(name,email,password);
         event.preventDefault();
         setValues({...value,error:false});
         signup({name,email,password})

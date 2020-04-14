@@ -16,7 +16,7 @@ exports.signup = (req, res) => {
   user.save((err, user) => {
     if (err) {
       return res.status(400).json({
-        err: "NOT able to save user in DB"
+        error: "NOT able to save user in DB"
       });
     }
     res.json({
@@ -45,6 +45,7 @@ exports.signin = (req, res) => {
     }
 
     if (!user.autheticate(password)) {
+  console.log("Fdafdassf",!user.autheticate(password));
       return res.status(401).json({
         error: "Email and password do not match"
       });

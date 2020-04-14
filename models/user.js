@@ -29,7 +29,9 @@ var userSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    salt: String,
+    salt:{
+      type:String
+    },
     role: {
       type: Number,
       default: 0
@@ -54,6 +56,7 @@ userSchema
   });
 
 userSchema.methods = {
+
   autheticate: function(plainpassword) {
     return this.securePassword(plainpassword) === this.encry_password;
   },
