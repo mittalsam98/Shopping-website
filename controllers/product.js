@@ -1,6 +1,7 @@
 const Product= require('../models/product');
 const fs = require('fs');
 const formidable = require('formidable');
+const _ =require('lodash');
 
 exports.getProductByID=(req,res,next,id)=>{
     Product.findById(id)
